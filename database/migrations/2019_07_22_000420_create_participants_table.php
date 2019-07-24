@@ -18,7 +18,7 @@ class CreateParticipantsTable extends Migration
             $table->bigInteger('tg_id');
             $table->string('tg_name');
             $table->bigInteger('tg_chat');
-            $table->decimal('factor', 2);
+            $table->decimal('factor', 4);
             $table->timestamps();
 
             $table->unique(['tg_id', 'tg_chat'], 'unique_email');
