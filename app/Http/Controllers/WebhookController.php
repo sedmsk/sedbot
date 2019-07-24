@@ -60,7 +60,7 @@ class WebhookController extends Controller
                     $data['message']['from']['last_name'] ?? '',
                 ]), '\s'),
                 'tg_chat' => $data['message']['chat']['id'],
-                'factor' => 1.1,
+                'factor' => 1.01,
             ]);
 
             Telegram::sendMessage([
