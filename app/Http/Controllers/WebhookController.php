@@ -77,6 +77,7 @@ class WebhookController extends Controller
 
                     return 'ok';
                 default:
+                    logs()->critical('Register command error', ['error' => $exception]);
                     return $this->unknownError($data);
             }
         } catch (\Throwable $t) {
