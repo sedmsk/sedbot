@@ -13,7 +13,10 @@ class WebhookController extends Controller
 
         logs()->debug('Webhook data:', ['request' => $data]);
 
-        if ($data['message'] && $data['message']['entities']) {
+        $isEntities = array_key_exists('message', $data)
+            && array_key_exists('entities', $data['message']);
+
+        if ($isEntities) {
             foreach ($data['message']['entities'] as $entity) {
                 switch ($entity['type']) {
                     case 'bot_command':
