@@ -68,7 +68,7 @@ class WebhookController extends Controller
 
             Telegram::sendMessage([
                 'chat_id' => $data['message']['chat']['id'],
-                'text' => 'Поздравяю! Ты в деле',
+                'text' => 'Поздравляю! Ты в деле.',
             ]);
         } catch (\Illuminate\Database\QueryException $exception) {
             switch ($exception->getCode()) {
@@ -166,7 +166,7 @@ class WebhookController extends Controller
             'parse_mode' => 'HTML',
             'text' => implode(' ', [
                 '<a href="tg://user?id='.$participant->tg_id.'">'.$participant->tg_name.'</a>',
-                'сегодня "побеждает", дружно поздавляем'
+                'сегодня "побеждает", дружно поздравляем'
             ]),
         ]);
 
