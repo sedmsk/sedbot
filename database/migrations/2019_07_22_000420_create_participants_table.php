@@ -21,7 +21,7 @@ class CreateParticipantsTable extends Migration
             $table->decimal('factor', 4);
             $table->timestamps();
 
-            $table->unique(['tg_id', 'tg_chat'], 'unique_email');
+            $table->unique(['tg_id', 'tg_chat'], 'unique_user');
         });
     }
 
