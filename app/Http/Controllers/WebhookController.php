@@ -58,10 +58,11 @@ class WebhookController extends Controller
         try {
             Participant::create([
                 'tg_id' => $data['message']['from']['id'],
-                'tg_name' => trim(implode(' ', [
-                    $data['message']['from']['first_name'] ?? '',
-                    $data['message']['from']['last_name'] ?? '',
-                ]), '\s'),
+                'tg_name' => $data['message']['from']['username']
+                    ?? trim(implode(' ', [
+                        $data['message']['from']['first_name'] ?? '',
+                        $data['message']['from']['last_name'] ?? '',
+                    ]), '\s'),
                 'tg_chat' => $data['message']['chat']['id'],
                 'factor' => 1,
             ]);
