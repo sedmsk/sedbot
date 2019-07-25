@@ -56,13 +56,18 @@ class WebhookController extends Controller
     protected function registerCommand($data): string
     {
         try {
+            if (array_key_exists('username', $data['message']['from'])) {
+                $username = '@'.$data['message']['from']['username'];
+            } else {
+                $username = trim(implode(' ', [
+                    $data['message']['from']['first_name'] ?? '',
+                    $data['message']['from']['last_name'] ?? '',
+                ]), '\s');
+            }
+
             Participant::create([
                 'tg_id' => $data['message']['from']['id'],
-                'tg_name' => $data['message']['from']['username']
-                    ?? trim(implode(' ', [
-                        $data['message']['from']['first_name'] ?? '',
-                        $data['message']['from']['last_name'] ?? '',
-                    ]), '\s'),
+                'tg_name' => $username,
                 'tg_chat' => $data['message']['chat']['id'],
                 'factor' => 1,
             ]);
