@@ -73,6 +73,7 @@ class WebhookController extends Controller
         } catch (\Illuminate\Database\QueryException $exception) {
             switch ($exception->getCode()) {
                 case 23000:
+                case 23505:
                     Telegram::sendMessage([
                         'chat_id' => $data['message']['chat']['id'],
                         'text' => 'Ты уже в деле!',
@@ -158,11 +159,13 @@ class WebhookController extends Controller
 
         shuffle($list);
 
+        $participant = $list[array_rand($list)];
+
         Telegram::sendMessage([
             'chat_id' => $data['message']['chat']['id'],
             'parse_mode' => 'HTML',
             'text' => implode(' ', [
-                '<a href="tg://user?id='.$list[array_rand($list)]->tg_id.'">'.$list[array_rand($list)]->tg_name.'</a>',
+                '<a href="tg://user?id='.$participant->tg_id.'">'.$participant->tg_name.'</a>',
                 'сегодня "побеждает", дружно поздавляем'
             ]),
         ]);
