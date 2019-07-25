@@ -13,11 +13,13 @@ class Telegram
 
         static::withProxy($curl);
 
-        logs()->debug('Telegram call:', ['data' => $arguments[0] ?? []]);
+        logs()->debug('Telegram request:', ['data' => $arguments[0] ?? []]);
 
         $data = $curl->withData($arguments[0] ?? [])
             ->asJsonResponse()
             ->post();
+
+        logs()->debug('Telegram response:', ['data' => $arguments[0] ?? []]);
 
         return $data;
     }
