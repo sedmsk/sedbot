@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Ixudra\Curl\Builder;
 use Ixudra\Curl\Facades\Curl;
 use RuntimeException;
 
@@ -10,24 +11,21 @@ class Telegram
     public function __call($name, $arguments)
     {
         $curl = Curl::to($this->apiUrl($name));
-
         static::withProxy($curl);
-
         logs()->debug('Telegram request:', ['data' => $arguments[0] ?? []]);
-
-        $data = $curl->withData($arguments[0] ?? [])
-            ->asJsonResponse()
-            ->post();
-
+        $data = $curl->withData($arguments[0] ?? [])->asJsonResponse()->post();
         logs()->debug('Telegram response:', ['data' => $arguments[0] ?? []]);
 
         return $data;
     }
 
+    /**
+     * @param string $method
+     * @return string
+     */
     protected function apiUrl(string $method): string
     {
         $token = config('services.telegram.token');
-
         if ($token === null) {
             throw new RuntimeException('Empty Telegram Bot Token');
         }
@@ -35,7 +33,10 @@ class Telegram
         return 'https://api.telegram.org/bot'.config('services.telegram.token').'/'.$method;
     }
 
-    protected static function withProxy(\Ixudra\Curl\Builder $curl)
+    /**
+     * @param Builder $curl
+     */
+    protected static function withProxy(Builder $curl): void
     {
         $proxy = config('services.telegram.proxy');
 
