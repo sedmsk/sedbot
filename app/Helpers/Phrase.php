@@ -60,10 +60,10 @@ class Phrase
 
         if ($response->getStatusCode() !== 200) {
             return "Добрую половину из вас я знаю вдвое хуже, чем следует,"
-            . " а худую половину — вдвое меньше, чем надо бы.\n— Бильбо Бэггинс";
+            . " а худую половину — вдвое меньше, чем надо бы. ©Бильбо Бэггинс";
         }
 
         $quote = json_decode((string) $response->getBody(), true);
-        return $quote['quoteText'] . ($quote['quoteAuthor'] ? "\n{$quote['quoteAuthor']}" : '');
+        return $quote['quoteText'] . ($quote['quoteAuthor'] ? " ©{$quote['quoteAuthor']}" : '');
     }
 }
