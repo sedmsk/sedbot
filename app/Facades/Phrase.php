@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Facade;
  * Class Lucky
  * @package App\Facades
  * @method static string wipe()
+ * @method static string quote()
  */
 class Phrase extends Facade
 {
