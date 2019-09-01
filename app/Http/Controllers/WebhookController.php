@@ -119,7 +119,7 @@ class WebhookController extends Controller
      * @param $data
      * @return string
      */
-    protected function wipe(array $data): string
+    protected function wipeCommand(array $data): string
     {
         $chatId = (int)$data['message']['chat']['id'];
         Lucky::wipe($chatId);
