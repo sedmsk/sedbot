@@ -98,4 +98,13 @@ class Lucky
 
         return $lucky;
     }
+
+    /**
+     * Сбрасываем коэффициенты для всех
+     * @param int $chat
+     */
+    public static function wipe(int $chat): void
+    {
+        Participant::where(['tg_chat' => $chat])->update(['factor' => Participant::MAX]);
+    }
 }

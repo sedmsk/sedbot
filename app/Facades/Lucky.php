@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static Participant register($telegramRequestData)
  * @method static void unregister($tgId, $tgChatId)
  * @method static Participant|null roll($tgChatId)
+ * @method static void wipe($tgChatId)
  */
 class Lucky extends Facade
 {

@@ -15,9 +15,9 @@ use Illuminate\Database\Eloquent\Model;
 class Participant extends Model
 {
     /** @var int максимальное значение коэффициента */
-    private const MAX = 1;
+    public const MAX = 1;
     /** @var int максимальное значение коэффициента */
-    private const MIN = 0;
+    public const MIN = 0;
     /** @var int шаг изменения коэффициента */
     private const STEP = 0.25;
 

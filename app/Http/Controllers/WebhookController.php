@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\LuckyRegisterException;
 use App\Exceptions\LuckyUnregisterException;
 use App\Facades\Lucky;
+use App\Facades\Phrase;
 use App\Facades\Telegram;
 
 class WebhookController extends Controller
@@ -114,6 +115,22 @@ class WebhookController extends Controller
     }
 
     /**
+     * Сброс коэффициентов
+     * @param $data
+     * @return string
+     */
+    protected function wipe(array $data): string
+    {
+        $chatId = (int)$data['message']['chat']['id'];
+        Lucky::wipe($chatId);
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => Phrase::wipe(),
+        ]);
+        return 'ok';
+    }
+
+        /**
      * Команда выбора "счастливчика"
      * @param $data
      * @return string

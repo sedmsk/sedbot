@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelegramServiceProvider::class,
         App\Providers\LuckyServiceProvider::class,
+        App\Providers\PhraseServiceProvider::class,
     ],
 
     /*
@@ -228,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Lucky' => App\Facades\Lucky::class,
+        'Phrase' => App\Facades\Phrase::class,
     ],
 
 ];
