@@ -37,15 +37,36 @@ class Phrase
         'Мы можем всё, когда мы вместе!',
     ];
 
+    private const REGISTER = [
+        'Добро пожаловать!',
+        'Очень рад! Очень рад!',
+        'Поздравляю! Ты в деле.',
+        'Принято! Надеюсь, ты не будешь здесь шуметь?',
+        'Здравствуй!',
+        'Проходи, надеюсь, ты не голоден?',
+        'Вы зарегистрированы.',
+        'Ваше прибывание здесь согласовано.',
+        'От мержа не убежать 😈',
+        'Кто ходит в гости по утрам, тот поступает мудро! Добро пожаловать!',
+        'Ты в теме! Я буду держать тебя вкурсе',
+    ];
+
+    private const UNREGISTER = [
+        'Ну ты это, заходи, если что.',
+        'Надеюсь, ты решил отдохнуть? Удачи!',
+        'До свидания!',
+        'Хорошо отдохнуть!',
+        'Мы будем по тебе скучать!',
+        'Жаль, что ты больше не хочешь участвовать😔 Возвращайся в любое время!',
+    ];
+
     /**
      * Генерация комплемента
      * @return string
      */
     public static function complement(): string
     {
-        $complements = self::COMPLEMENTS;
-        shuffle($complements);
-        return $complements[array_rand($complements)];
+        return self::randomValue(self::COMPLEMENTS);
     }
 
     /**
@@ -87,6 +108,38 @@ class Phrase
     }
 
     /**
+     * @return string
+     */
+    public static function alreadyUnregister(): string
+    {
+        return 'Ты уже и так не участвуешь 😳';
+    }
+
+    /**
+     * @return string
+     */
+    public static function alreadyRegister(): string
+    {
+        return 'Ты уже в деле! 😉';
+    }
+
+    /**
+     * @return string
+     */
+    public static function unregister(): string
+    {
+        return self::randomValue(self::UNREGISTER);
+    }
+
+    /**
+     * @return string
+     */
+    public static function register(): string
+    {
+        return self::randomValue(self::REGISTER);
+    }
+
+    /**
      * Неизвестная команда
      * @return string
      */
@@ -96,11 +149,26 @@ class Phrase
     }
 
     /**
+     * @return string
+     */
+    public static function emptyUserList(): string
+    {
+        return 'К сожалению нет ни одного желающего поучаствовать 😨';
+    }
+
+    /**
      * Сообщение ошибки
      * @return string
      */
     public static function error(): string
     {
         return 'Упс, ошибочка 😡';
+    }
+
+    public static function randomValue(array $array): string
+    {
+        $map = $array;
+        shuffle($map);
+        return $map[array_rand($map)];
     }
 }

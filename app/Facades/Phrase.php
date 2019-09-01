@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Facade;
  * @method static string random()
  * @method static string unknownCommand()
  * @method static string error()
+ * @method static string register()
+ * @method static string unregister()
+ * @method static string alreadyUnregister()
+ * @method static string alreadyRegister()
+ * @method static string emptyUserList()
  */
 class Phrase extends Facade
 {

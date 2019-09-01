@@ -76,12 +76,12 @@ class WebhookController extends Controller
             Lucky::register($data);
             Telegram::sendMessage([
                 'chat_id' => $data['message']['chat']['id'],
-                'text' => 'Поздравляю! Ты в деле.',
+                'text' => Phrase::register(),
             ]);
         } catch (LuckyRegisterException $exception) {
             Telegram::sendMessage([
                 'chat_id' => $data['message']['chat']['id'],
-                'text' => 'Ты уже в деле!',
+                'text' => Phrase::alreadyRegister(),
             ]);
 
             return 'ok';
@@ -102,12 +102,12 @@ class WebhookController extends Controller
             Lucky::unregister((int) $data['message']['from']['id'], $chatId);
             Telegram::sendMessage([
                 'chat_id' => $chatId,
-                'text' => "Жаль, что ты больше не хочешь участвовать:(\nВозвращайся в любое время",
+                'text' => Phrase::unregister(),
             ]);
         } catch (LuckyUnregisterException $exception) {
             Telegram::sendMessage([
                 'chat_id' => $data['message']['chat']['id'],
-                'text' => 'Ты уже и так не участвуешь:(',
+                'text' => Phrase::alreadyUnregister(),
             ]);
         }
 
@@ -142,7 +142,7 @@ class WebhookController extends Controller
         if ($lucky === null) {
             Telegram::sendMessage([
                 'chat_id' => $chat,
-                'text' => 'К сожалению нет ни одного желающего поучаствовать:(',
+                'text' => Phrase::emptyUserList(),
             ]);
 
             return 'ok';
