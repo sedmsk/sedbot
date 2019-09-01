@@ -153,7 +153,7 @@ class WebhookController extends Controller
             'parse_mode' => 'HTML',
             'text' => implode(' ', [
                 "<a href=\"tg://user?id={$lucky->tg_id}\">{$lucky->tg_name}</a>",
-                Phrase::quote()
+                Phrase::random()
             ]),
         ]);
 

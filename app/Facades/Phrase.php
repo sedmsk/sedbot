@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Facade;
 /**
  * Class Lucky
  * @package App\Facades
- * @method static string wipe()
  * @method static string quote()
+ * @method static string complement()
+ * @method static string random()
  */
 class Phrase extends Facade
 {
