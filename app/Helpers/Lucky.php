@@ -70,10 +70,6 @@ class Lucky
     public static function roll(int $chat): ?Participant
     {
         $participants = Participant::where(['tg_chat' => $chat])->get();
-        if (!$participants) {
-            return null;
-        }
-
         $list = [];
         foreach ($participants as $participant) {
             for ($i = 0, $l = 100 * $participant->factor; $i < $l; $i++) {
@@ -81,7 +77,25 @@ class Lucky
             }
         }
 
+        if ($list === []) {
+            return null;
+        }
+
         shuffle($list);
-        return $list[array_rand($list)];
+        $lucky = $list[array_rand($list)];
+
+        /** @var Participant $participant */
+        foreach ($participants as $participant) {
+            // Для выпавшего понижаем коэффициент
+            if ($lucky->id == $participant->id) {
+                $participant->factorDown();
+            } else {
+                // для других повышаем
+                $participant->factorUp();
+            }
+            $participant->save();
+        }
+
+        return $lucky;
     }
 }
