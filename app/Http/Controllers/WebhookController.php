@@ -24,7 +24,7 @@ class WebhookController extends Controller
                         default:
                             Telegram::sendMessage([
                                 'chat_id' => $chatId,
-                                'text' => 'Я не понимаю чего ты от меня хочешь:(',
+                                'text' => Phrase::unknownCommand(),
                             ]);
                     }
                 }
@@ -33,7 +33,7 @@ class WebhookController extends Controller
             logs()->critical('Register command error', ['error' => $exception]);
             Telegram::sendMessage([
                 'chat_id' => $chatId,
-                'text' => 'Упс, ошибочка:(',
+                'text' => Phrase::error(),
             ]);
         }
 
@@ -59,7 +59,7 @@ class WebhookController extends Controller
 
         Telegram::sendMessage([
             'chat_id' => $data['message']['chat']['id'],
-            'text' => 'Я не знаю такую команду:(',
+            'text' => Phrase::unknownCommand(),
         ]);
 
         return 'ok';

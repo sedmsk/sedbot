@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static string quote()
  * @method static string complement()
  * @method static string random()
+ * @method static string unknownCommand()
+ * @method static string error()
  */
 class Phrase extends Facade
 {
