@@ -136,7 +136,7 @@ class WebhookController extends Controller
             'parse_mode' => 'HTML',
             'text' => implode(' ', [
                 "<a href=\"tg://user?id={$lucky->tg_id}\">{$lucky->tg_name}</a>",
-                'сегодня "побеждает", дружно поздравляем'
+                'сегодня "побеждает", дружно поздравляем. А новый код работает.'
             ]),
         ]);
 
