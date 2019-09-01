@@ -2,15 +2,11 @@
 
 namespace App\Providers;
 
-use App\Facades\Lucky as LuckyFacade;
 use App\Helpers\Lucky;
 use Illuminate\Support\ServiceProvider;
 
 class LuckyServiceProvider extends ServiceProvider
 {
-    /** @var bool  */
-    protected $defer = true;
-
     /**
      * Register services.
      *
@@ -18,18 +14,8 @@ class LuckyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(LuckyFacade::class, function ($app) {
+        $this->app->singleton('lucky', function ($app) {
             return new Lucky();
         });
-    }
-
-    /**
-     * Bootstrap services.
-     *
-     * @return array
-     */
-    public function provides(): array
-    {
-        return [LuckyFacade::class];
     }
 }

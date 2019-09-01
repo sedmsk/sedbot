@@ -16,6 +16,6 @@ class Lucky extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'Lucky';
+        return 'lucky';
     }
 }
