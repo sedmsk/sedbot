@@ -63,7 +63,7 @@ class Phrase
             . " а худую половину — вдвое меньше, чем надо бы.\n— Бильбо Бэггинс";
         }
 
-        $quote = json_decode($response->getBody(), true);
+        $quote = json_decode((string) $response->getBody(), true);
         return $quote['quoteText'] . ($quote['quoteAuthor'] ? "\n{$quote['quoteAuthor']}" : '');
     }
 }
