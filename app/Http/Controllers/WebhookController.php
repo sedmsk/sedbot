@@ -49,7 +49,7 @@ class WebhookController extends Controller
     {
         $command = substr($data['message']['text'], $entity['offset'], $entity['length']);
 
-        if (preg_match('/\/(\w+)/', $command, $matches) === 1) {
+        if (preg_match('/^\/(\w+)$/', trim($command), $matches) === 1) {
             $commandMethod = $matches[1].'Command';
 
             if (method_exists($this, $commandMethod)) {
